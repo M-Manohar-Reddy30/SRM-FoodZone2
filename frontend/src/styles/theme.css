@@ -1,0 +1,89 @@
+/* src/theme.css */
+
+/* MUST be first */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===================== */
+/* BASE THEME VARIABLES */
+/* ===================== */
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --primary: 350 71% 36%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 210 25% 16%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 210 20% 94%;
+    --muted-foreground: 210 15% 45%;
+
+    --accent: 45 100% 48%;
+    --accent-foreground: 210 25% 16%;
+
+    --success: 158 64% 40%;
+    --warning: 38 92% 50%;
+    --destructive: 0 65% 45%;
+
+    --border: 210 20% 90%;
+    --input: 210 20% 90%;
+    --ring: 350 71% 36%;
+
+    --radius: 0.625rem;
+  }
+
+  .dark {
+    --background: 210 25% 10%;
+    --foreground: 210 20% 94%;
+
+    --primary: 350 71% 45%;
+    --secondary: 210 25% 22%;
+    --muted: 210 25% 18%;
+    --accent: 45 100% 52%;
+  }
+}
+
+/* ===================== */
+/* GLOBAL BASE STYLES */
+/* ===================== */
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: "Playfair Display", serif;
+  }
+}
+
+/* ===================== */
+/* UTILITIES */
+/* ===================== */
+
+@layer utilities {
+  .card-elevated {
+    @apply bg-card rounded-xl shadow-md hover:shadow-xl transition;
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
