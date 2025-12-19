@@ -6,32 +6,27 @@ export const api = axios.create({
   withCredentials: true,
 })
 
-/* ---------- REQUEST INTERCEPTOR ---------- */
+/* Attach token */
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem(STORAGE_KEYS.TOKEN)
-
     if (token) {
       config.headers.Authorization = `Bearer ${token}`
     }
-
     return config
   },
   (error) => Promise.reject(error)
 )
 
-/* ---------- RESPONSE INTERCEPTOR ---------- */
+/* Handle auth expiry */
 api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
       localStorage.removeItem(STORAGE_KEYS.TOKEN)
       localStorage.removeItem(STORAGE_KEYS.USER)
-
-      // Hard redirect to avoid stale state
       window.location.href = "/login"
     }
-
     return Promise.reject(error)
   }
 )
