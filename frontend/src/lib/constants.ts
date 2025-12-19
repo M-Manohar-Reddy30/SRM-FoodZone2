@@ -5,14 +5,15 @@
 
 /* ---------- API ---------- */
 export const API_BASE_URL =
-  import.meta.env.VITE_API_BASE_URL || "http://localhost:8000/api"
+  import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api"
 
-/* ---------- AUTH ---------- */
+/* ---------- STORAGE ---------- */
 export const STORAGE_KEYS = {
-  TOKEN: "token",
-  USER: "user",
-}
+  TOKEN: "srm_foodzone_token",
+  USER: "srm_foodzone_user",
+} as const
 
+/* ---------- USER ROLES ---------- */
 export const USER_ROLES = {
   STUDENT: "student",
   OWNER: "owner",
@@ -60,7 +61,7 @@ export const ROUTES = {
     HISTORY: "/delivery/history",
     SETTINGS: "/delivery/settings",
   },
-}
+} as const
 
 /* ---------- ORDER STATUS ---------- */
 export const ORDER_STATUS = {
@@ -83,19 +84,19 @@ export const DELIVERY_STATUS = {
   DELIVERED: "delivered",
 } as const
 
-/* ---------- UI ---------- */
+/* ---------- APP META ---------- */
 export const APP_META = {
   NAME: "SRM FoodZone",
   TAGLINE: "Campus Food Delivery",
   CAMPUS: "SRM KTR",
   SUPPORT_EMAIL: "support@srmfoodzone.com",
-}
+} as const
 
 /* ---------- PAGINATION ---------- */
 export const PAGINATION = {
   DEFAULT_PAGE: 1,
   PAGE_SIZE: 10,
-}
+} as const
 
 /* ---------- TOAST MESSAGES ---------- */
 export const TOAST_MESSAGES = {
@@ -104,10 +105,10 @@ export const TOAST_MESSAGES = {
   LOGIN_FAILED: "Invalid email or password",
   REGISTER_SUCCESS: "Account created successfully 🎉",
   SOMETHING_WENT_WRONG: "Something went wrong. Try again.",
-}
+} as const
 
 /* ---------- TIME ---------- */
 export const TIME = {
   OTP_EXPIRY_MINUTES: 5,
   DELIVERY_AVG_MINUTES: 30,
-}
+} as const

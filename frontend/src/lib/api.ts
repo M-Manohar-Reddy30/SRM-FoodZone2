@@ -1,28 +1,37 @@
-import axios from "axios";
+import axios from "axios"
+import { API_BASE_URL, STORAGE_KEYS } from "./constants"
 
 export const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || "http://localhost:8000/api",
+  baseURL: API_BASE_URL,
   withCredentials: true,
-});
+})
 
+/* ---------- REQUEST INTERCEPTOR ---------- */
 api.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem(STORAGE_KEYS.TOKEN)
+
     if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
+      config.headers.Authorization = `Bearer ${token}`
     }
-    return config;
+
+    return config
   },
   (error) => Promise.reject(error)
-);
+)
 
+/* ---------- RESPONSE INTERCEPTOR ---------- */
 api.interceptors.response.use(
-  (res) => res,
-  (err) => {
-    if (err.response?.status === 401) {
-      localStorage.removeItem("token");
-      window.location.href = "/login";
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      localStorage.removeItem(STORAGE_KEYS.TOKEN)
+      localStorage.removeItem(STORAGE_KEYS.USER)
+
+      // Hard redirect to avoid stale state
+      window.location.href = "/login"
     }
-    return Promise.reject(err);
+
+    return Promise.reject(error)
   }
-);
+)
